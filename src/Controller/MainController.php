@@ -8,15 +8,18 @@ use App\Repository\EntityRepository;
 
 class MainController extends AbstractController
 {
+    private $userId;
     /**
      * @Route("/", name="homepage")
      */
     public function index(EntityRepository $entityRepository)
     {
-        $pokemons = $entityRepository->findAll();
+        $this->userId = $this->getUser()->getId();
+
+        $pokemons = $entityRepository->findAllByUserId($this->userId);
         $nb = sizeof($pokemons);
-        $nbEvo = $entityRepository->getNbEvo();
-        $stats = $entityRepository->getStatsByType();
+        $nbEvo = $entityRepository->getNbEvo($this->userId);
+        $stats = $entityRepository->getStatsByType($this->userId);
         
         return $this->render('main/index.html.twig', [
             'pokemons' => $pokemons,

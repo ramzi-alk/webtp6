@@ -14,6 +14,7 @@
                 <th>Starter</th>
                 <th>TypeCourbeNiveau</th>
                 <th>actions</th>
+                <th>xp</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
                 <td>{{ pokemon_type.evolution ? 'Yes' : 'No' }}</td>
                 <td>{{ pokemon_type.starter ? 'Yes' : 'No' }}</td>
                 <td>{{ pokemon_type.typeCourbeNiveau }}</td>
+                <td>100 </td>
                 <td>
                     <a href="{{ path('pokemon_type_show', {'id': pokemon_type.id}) }}">show</a>
                     <a href="{{ path('pokemon_type_edit', {'id': pokemon_type.id}) }}">edit</a>

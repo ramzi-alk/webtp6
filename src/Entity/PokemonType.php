@@ -67,7 +67,7 @@ class PokemonType
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $idDresseur = 1;
+    private $idDresseur;
 
     /**
      * @ORM\Column(type="boolean")

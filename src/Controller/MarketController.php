@@ -7,16 +7,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\PokemonType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class MarketController extends AbstractController
 {
     /**
      * @Route("/market", name="market")
+     * 
      */
     public function index()
     {
+       
+
         return $this->render('market/index.html.twig', [
             'controller_name' => 'MarketController',
         ]);
@@ -31,5 +33,4 @@ class MarketController extends AbstractController
             'pokemon_type' => $pokemonType,
         ]);
     }
-
 }
