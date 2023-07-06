@@ -57,27 +57,27 @@ class PokemonType
     /**
      * @ORM\Column(type="integer")
      */
-    private $xp;
+    private $xp =0 ;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastTraining;
+    private $lastTraining ;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $idDresseur;
+    private $idDresseur = 1;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $etatVente;
+    private $etatVente = false;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $niveau;
+    private $niveau = 0;
 
 
 
