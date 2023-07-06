@@ -107,6 +107,51 @@ class PokemonTypeController extends AbstractController
             return $this->redirectToRoute('pokemon_type_show', ['id' => $pokemonType->getId()]);
         }
 
+
+        if ($pokemonType->getTypeCourbeNiveau() === 'R') {
+            $niveau = $pokemonType->getNiveau();
+            $xp = $pokemonType->getXp();
+    
+            $threshold = 0.8 * pow($niveau, 3);
+    
+            if ($xp >= $threshold) {
+                $pokemonType->setNiveau($niveau + 1);
+                $pokemonType->setXp($xp - $threshold);
+            }
+        } elseif ($pokemonType->getTypeCourbeNiveau() === 'M') {
+            $niveau = $pokemonType->getNiveau();
+            $xp = $pokemonType->getXp();
+    
+            $threshold = pow($niveau, 3);
+    
+            if ($xp >= $threshold) {
+                $pokemonType->setNiveau($niveau + 1);
+                $pokemonType->setXp($xp - $threshold);
+            }
+        }
+        elseif ($pokemonType->getTypeCourbeNiveau() === 'P') {
+            $niveau = $pokemonType->getNiveau();
+            $xp = $pokemonType->getXp();
+    
+            $threshold = 1.2 * pow($niveau, 3) - 15 * pow($niveau, 2) + 100 * $niveau - 140;
+    
+            if ($xp >= $threshold) {
+                $pokemonType->setNiveau($niveau + 1);
+                $pokemonType->setXp($xp - $threshold);
+            }
+        }
+        elseif ($pokemonType->getTypeCourbeNiveau() === 'L') {
+            $niveau = $pokemonType->getNiveau();
+            $xp = $pokemonType->getXp();
+    
+            $threshold = 1.25 * pow($niveau, 3);
+    
+            if ($xp >= $threshold) {
+                $pokemonType->setNiveau($niveau + 1);
+                $pokemonType->setXp($xp - $threshold);
+            }
+        }
+
         $pokemonType->setXp($pokemonType->getXp() + $randomXP);
         $pokemonType->setLastTraining($currentTime);
     
