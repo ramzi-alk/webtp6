@@ -17,13 +17,15 @@ use DateTime;
  */
 class PokemonTypeController extends AbstractController
 {
+    private int $userId;
     /**
      * @Route("/", name="pokemon_type_index", methods={"GET"})
      */
     public function index(EntityRepository $entityRepository): Response
     {
+        $this->userId = $this->getUser()->getId();
         return $this->render('pokemon_type/index.html.twig', [
-            'pokemon_types' => $entityRepository->findAll(),
+            'pokemon_types' => $entityRepository->findAllByUserId($this->userId),
         ]);
     }
 

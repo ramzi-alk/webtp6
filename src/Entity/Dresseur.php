@@ -6,19 +6,19 @@ use App\Repository\DresseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+ 
 
 /**
  * @ORM\Entity(repositoryClass=DresseurRepository::class)
  */
-class Dresseur
+class Dresseur 
 {
-
-
-    /*** @ORM\Id
+    /**
+     * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $idDresseur;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -40,29 +40,16 @@ class Dresseur
      */
     private $pieces;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commerce::class, mappedBy="idDresseur")
-     */
-    private $idPokemon;
-
-    public function __construct()
-    {
-        $this->idPokemon = new ArrayCollection();
-    }
+    // Getters et Setters
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdDresseur(): ?int
+    public function setId(int $id): self
     {
-        return $this->idDresseur;
-    }
-
-    public function setIdDresseur(int $idDresseur): self
-    {
-        $this->idDresseur = $idDresseur;
+        $this->id = $id;
 
         return $this;
     }
@@ -111,36 +98,6 @@ class Dresseur
     public function setPieces(int $pieces): self
     {
         $this->pieces = $pieces;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commerce>
-     */
-    public function getIdPokemon(): Collection
-    {
-        return $this->idPokemon;
-    }
-
-    public function addIdPokemon(Commerce $idPokemon): self
-    {
-        if (!$this->idPokemon->contains($idPokemon)) {
-            $this->idPokemon[] = $idPokemon;
-            $idPokemon->setIdDresseur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdPokemon(Commerce $idPokemon): self
-    {
-        if ($this->idPokemon->removeElement($idPokemon)) {
-            // set the owning side to null (unless already changed)
-            if ($idPokemon->getIdDresseur() === $this) {
-                $idPokemon->setIdDresseur(null);
-            }
-        }
 
         return $this;
     }
