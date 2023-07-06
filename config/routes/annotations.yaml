@@ -5,3 +5,8 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+pokemon_type_training:
+    path: '/pokemons/{id}/training'
+    controller: 'App\Controller\PokemonTypeController::training'
+    methods: [POST]
