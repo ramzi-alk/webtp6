@@ -43,7 +43,15 @@
     <a href="{{ path('pokemon_type_edit', {'id': pokemon_type.id}) }}">edit</a>
     <span>|</span>
     
-    <a href="#">training</a>
+
+    <a href="{{ path('pokemon_type_training', {'id': pokemon_type.id}) }}" onclick="event.preventDefault(); document.getElementById('training-form').submit();">training</a>
+
+    <form id="training-form" action="{{ path('pokemon_type_training', {'id': pokemon_type.id}) }}" method="POST" style="display: none;">
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token('training' ~ pokemon_type.id) }}">
+    </form>
+
+
     
 
     {{ include('pokemon_type/_delete_form.html.twig') }}
