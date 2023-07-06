@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,7 @@ class PokemonType
      */
     private $evolution;
 
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -49,6 +52,34 @@ class PokemonType
      * @ORM\Column(type="string", length=1,options={"fixed" = true})
      */
     private $typeCourbeNiveau;
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $xp;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastTraining;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $idDresseur;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etatVente;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $niveau;
+
+
 
     public function getId(): ?int
     {
@@ -72,6 +103,66 @@ class PokemonType
         return $this->evolution;
     }
 
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function setXp(int $xp): self
+    {
+        $this->xp = $xp;
+
+        return $this;
+    }
+
+    public function getLastTraining(): ?\DateTimeInterface
+    {
+        return $this->lastTraining;
+    }
+
+    public function setLastTraining(?\DateTimeInterface $lastTraining): self
+    {
+        $this->lastTraining = $lastTraining;
+
+        return $this;
+    }
+
+    public function getIdDresseur(): ?int
+    {
+        return $this->idDresseur;
+    }
+
+    public function setIdDresseur(?int $idDresseur): self
+    {
+        $this->idDresseur = $idDresseur;
+
+        return $this;
+    }
+
+    public function getEtatVente(): ?bool
+    {
+        return $this->etatVente;
+    }
+
+    public function setEtatVente(bool $etatVente): self
+    {
+        $this->etatVente = $etatVente;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?int
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(int $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+    
     public function setEvolution(bool $evolution): self
     {
         $this->evolution = $evolution;
@@ -126,4 +217,5 @@ class PokemonType
 
         return $this;
     }
+
 }

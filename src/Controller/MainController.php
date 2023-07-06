@@ -17,11 +17,13 @@ class MainController extends AbstractController
         $nb = sizeof($pokemons);
         $nbEvo = $entityRepository->getNbEvo();
         $stats = $entityRepository->getStatsByType();
+        
         return $this->render('main/index.html.twig', [
             'pokemons' => $pokemons,
             'nb' => $nb,
             'stats' => $stats,
             'nbEvo' => $nbEvo
+
         ]);
     }
 }
