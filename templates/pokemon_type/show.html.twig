@@ -27,12 +27,28 @@
                 <th>TypeCourbeNiveau</th>
                 <td>{{ pokemon_type.typeCourbeNiveau }}</td>
             </tr>
+            <tr>
+                <th>level</th>
+                <td>{{ pokemon_type.niveau }}</td>
+            </tr>
+            <tr>
+                <th>xp</th>
+                <td>{{ pokemon_type.xp }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('pokemon_type_index') }}">back to list</a>
-
+    <a href="{{ path('pokemon_type_index') }}">back to list  </a>
+    <span>|</span>
     <a href="{{ path('pokemon_type_edit', {'id': pokemon_type.id}) }}">edit</a>
+    <span>|</span>
+    
+    <a href="{{ path('pokemon_type_training', {'id': pokemon_type.id}) }}" onclick="event.preventDefault(); document.getElementById('training-form').submit();">training</a>
+
+    <form id="training-form" action="{{ path('pokemon_type_training', {'id': pokemon_type.id}) }}" method="POST" style="display: none;">
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token('training' ~ pokemon_type.id) }}">
+    </form>
 
     
 
