@@ -12,22 +12,22 @@ class Commerce
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Dresseur::class, inversedBy="idPokemon")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pokemons")
+     * @ORM\JoinColumn(name="id_dresseur", referencedColumnName="id", nullable=false)
      */
-    private $idDresseur;
+    private $dresseur;
 
     /**
      * @ORM\ManyToOne(targetEntity=PokemonType::class, inversedBy="commerces")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="id_pokemon", referencedColumnName="id", nullable=false)
      */
-    private $idPokemon;
+    private $pokemon;
 
     /**
      * @ORM\Column(type="integer")
@@ -35,35 +35,36 @@ class Commerce
     private $salePrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Dresseur::class)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pokemons")
+     * @ORM\JoinColumn(name="id_acheteur", referencedColumnName="id", nullable=true)
      */
-    private $idAcheteur;
+    private $acheteur;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdDresseur(): ?Dresseur
+    public function getDresseur(): ?User
     {
-        return $this->idDresseur;
+        return $this->dresseur;
     }
 
-    public function setIdDresseur(?Dresseur $idDresseur): self
+    public function setDresseur(?User $dresseur): self
     {
-        $this->idDresseur = $idDresseur;
+        $this->dresseur = $dresseur;
 
         return $this;
     }
 
-    public function getIdPokemon(): ?PokemonType
+    public function getPokemon(): ?PokemonType
     {
-        return $this->idPokemon;
+        return $this->pokemon;
     }
 
-    public function setIdPokemon(?PokemonType $idPokemon): self
+    public function setPokemon(?PokemonType $pokemon): self
     {
-        $this->idPokemon = $idPokemon;
+        $this->pokemon = $pokemon;
 
         return $this;
     }
@@ -80,14 +81,14 @@ class Commerce
         return $this;
     }
 
-    public function getIdAcheteur(): ?Dresseur
+    public function getAcheteur(): ?User
     {
-        return $this->idAcheteur;
+        return $this->acheteur;
     }
 
-    public function setIdAcheteur(?Dresseur $idAcheteur): self
+    public function setAcheteur(?User $acheteur): self
     {
-        $this->idAcheteur = $idAcheteur;
+        $this->acheteur = $acheteur;
 
         return $this;
     }

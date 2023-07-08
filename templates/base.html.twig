@@ -13,15 +13,23 @@
     </head>
     <body>
     <h1>Le Pokedex</h1>
+
+    
     {% if is_granted('ROLE_DRESSEUR') %}
+    <h2>Bonjour {{ app.user.name }} !</h2>
+    <p>Vous avez {{ app.user.pieces }} pièces</p>
     <ul>
         <li><a href="{{ path('app_logout') }}">Logout</a></li>
         <li><a href="{{ path('homepage') }}">Home</a></li>
         <li><a href="{{ path('pokemon_type_index') }}">Liste des pokemons</a></li>
         <li><a href="{{ path('pokemon_type_new') }}">Ajouter un type de pokemon</a></li>
-        <li><a href="{{ path('market') }}">Marché</a></li>
+        <li><a href="{{ path('Commerce') }}">Marché</a></li>
+        <li><a href="{{ path('app_chasse') }}">Chasse</a></li>
     </ul>
+    {% else %}
+    <li><a href="{{ path('app_login') }}">Login</a></li>
     {% endif %}
+
     
     <div class="card" style="width: 80%;margin: auto">
         <div class="card-body">

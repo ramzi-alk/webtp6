@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Commerce;
+use App\Entity\Chasse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Commerce>
+ * @extends ServiceEntityRepository<Chasse>
  *
- * @method Commerce|null find($id, $lockMode = null, $lockVersion = null)
- * @method Commerce|null findOneBy(array $criteria, array $orderBy = null)
- * @method Commerce[]    findAll()
- * @method Commerce[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Chasse|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Chasse|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Chasse[]    findAll()
+ * @method Chasse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CommerceRepository extends ServiceEntityRepository
+class ChasseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Commerce::class);
+        parent::__construct($registry, Chasse::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Commerce $entity, bool $flush = true): void
+    public function add(Chasse $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -35,13 +35,11 @@ class CommerceRepository extends ServiceEntityRepository
         }
     }
 
-    
-
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Commerce $entity, bool $flush = true): void
+    public function remove(Chasse $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -49,10 +47,8 @@ class CommerceRepository extends ServiceEntityRepository
         }
     }
 
-    
-
     // /**
-    //  * @return Commerce[] Returns an array of Commerce objects
+    //  * @return Chasse[] Returns an array of Chasse objects
     //  */
     /*
     public function findByExampleField($value)
@@ -69,7 +65,7 @@ class CommerceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Commerce
+    public function findOneBySomeField($value): ?Chasse
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

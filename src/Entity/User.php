@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -46,6 +48,16 @@ class User implements UserInterface
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commerce::class, mappedBy="dresseur")
+     */
+    private $pokemons;
+
+    public function __construct()
+    {
+        $this->pokemons = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +83,11 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
+    }
+
+    public function __toString()
+    {
+        return $this->name ;
     }
 
     /**
@@ -147,6 +164,36 @@ class User implements UserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commerce[]
+     */
+    public function getPokemons(): Collection
+    {
+        return $this->pokemons;
+    }
+
+    public function addPokemon(Commerce $pokemon): self
+    {
+        if (!$this->pokemons->contains($pokemon)) {
+            $this->pokemons[] = $pokemon;
+            $pokemon->setDresseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokemon(Commerce $pokemon): self
+    {
+        if ($this->pokemons->removeElement($pokemon)) {
+            // set the owning side to null (unless already changed)
+            if ($pokemon->getDresseur() === $this) {
+                $pokemon->setDresseur(null);
+            }
+        }
 
         return $this;
     }

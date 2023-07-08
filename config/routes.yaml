@@ -4,4 +4,14 @@
 
 buy_pokemon:
     path: /buy/{id}
-    controller: App\Controller\MarketController::buyPokemon
+    controller: App\Controller\CommerceController::buyPokemon
+    methods: [GET, POST]
+pokemon_type_sell:
+  path: /sell/{id}
+  controller: App\Controller\CommerceController::sellPokemon
+  methods: [GET, POST]
+
+confirm_purchase:
+  path: /buy/{id}
+  controller: App\Controller\CommerceController::confirmPurchase
+  methods: [GET, POST]

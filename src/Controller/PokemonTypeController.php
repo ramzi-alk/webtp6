@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PokemonType;
 use App\Form\PokemonTypeType;
+use App\Entity\Commerce;
 use App\Repository\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,7 +63,25 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
+   
+
     /**
+     * @Route("/{id}", name="pokemon_type_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, PokemonType $pokemonType): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$pokemonType->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($pokemonType);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('pokemon_type_index');
+    }
+
+   
+
+     /**
      * @Route("/{id}/edit", name="pokemon_type_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, PokemonType $pokemonType): Response
@@ -82,19 +101,13 @@ class PokemonTypeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="pokemon_type_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, PokemonType $pokemonType): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$pokemonType->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($pokemonType);
-            $entityManager->flush();
-        }
+    
 
-        return $this->redirectToRoute('pokemon_type_index');
-    }
+    
+    
+    
+    
+
 
     public function training(PokemonType $pokemonType): Response
     {

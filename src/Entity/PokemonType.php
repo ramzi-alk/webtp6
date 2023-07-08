@@ -79,7 +79,25 @@ class PokemonType
      */
     private $niveau = 0;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commerce::class, mappedBy="pokemon")
+     */
+    private $commerces;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Chasse::class, mappedBy="pokemon")
+     */
+    private $chasses;
+
+    public function __construct()
+    {
+        $this->chasses = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
 
     public function getId(): ?int
     {
@@ -214,6 +232,44 @@ class PokemonType
     public function setType2(?ElementaryType $type2): self
     {
         $this->type2 = $type2;
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Commerce>
+     */
+    public function getCommerces(): Collection
+    {
+        return $this->commerces;
+    }
+
+    /**
+     * @return Collection<int, Chasse>
+     */
+    public function getChasses(): Collection
+    {
+        return $this->chasses;
+    }
+
+    public function addChass(Chasse $chass): self
+    {
+        if (!$this->chasses->contains($chass)) {
+            $this->chasses[] = $chass;
+            $chass->setPokemon($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChass(Chasse $chass): self
+    {
+        if ($this->chasses->removeElement($chass)) {
+            // set the owning side to null (unless already changed)
+            if ($chass->getPokemon() === $this) {
+                $chass->setPokemon(null);
+            }
+        }
 
         return $this;
     }

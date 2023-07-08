@@ -18,6 +18,7 @@ class PokemonTypeType extends AbstractType
             ->add('typeCourbeNiveau')
             ->add('type1')
             ->add('type2')
+            
         ;
     }
 

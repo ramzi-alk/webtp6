@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sell Pokemon{% endblock %}
+
+{% block body %}
+    <h1>Sell Pokemon</h1>
+    
+    {{ include('commerce/_form.html.twig', {'button_label': 'Vendre'}) }}
+
+{% endblock %}

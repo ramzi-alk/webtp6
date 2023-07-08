@@ -50,6 +50,7 @@ public function getStatsByType(int $userId)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.idDresseur = :userId')
+            ->andWhere('p.etatVente = false')
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();

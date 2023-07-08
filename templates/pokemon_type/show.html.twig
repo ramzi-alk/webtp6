@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PokemonType{% endblock %}
+{% block title %}Pokemon Details{% endblock %}
 
 {% block body %}
     <h1>PokemonType</h1>
@@ -42,7 +42,7 @@
     <span>|</span>
     <a href="{{ path('pokemon_type_edit', {'id': pokemon_type.id}) }}">edit</a>
     <span>|</span>
-    
+
 
     <a href="{{ path('pokemon_type_training', {'id': pokemon_type.id}) }}" onclick="event.preventDefault(); document.getElementById('training-form').submit();">training</a>
 
