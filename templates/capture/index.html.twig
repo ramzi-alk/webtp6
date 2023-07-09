@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capture Pokémon{% endblock %}
+
+{% block body %}
+    <h1>Capture Pokémon</h1>
+    <form action="{{ path('app_capture') }}" method="post">
+        <div>
+            <label for="pokemon">Choisissez votre Pokémon :</label>
+            <select name="pokemon" id="pokemon">
+                {% for pokemon in pokemons %}
+             
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="location">Choisissez un lieu :</label>
+            <select name="location" id="location">
+                <option value="montagne">Montagne</option>
+                <option value="prairie">Prairie</option>
+                <option value="ville">Ville</option>
+                <option value="foret">Forêt</option>
+                <option value="plage">Plage</option>
+            </select>
+        </div>
+        <button type="submit">Capturer</button>
+    </form>
+{% endblock %}
