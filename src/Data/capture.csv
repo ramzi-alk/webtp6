@@ -1,0 +1,18 @@
+Type;montagne;prairie;ville;foret;plage
+ACIER;1      ;       ;     ;      ;
+COMBAT;      ;       ;1    ;      ;
+DRAGON;1     ;       ;     ;      ;1
+EAU;         ;       ;     ;      ;1
+ELECTRIK;    ;       ;1    ;      ;
+FEU;         ;1      ;     ;      ;
+GLACE;1      ;       ;     ;      ;
+INSECTE;     ;       ;     ;1     ;
+NORMAL;1     ;1      ;1    ;1     ;1
+PLANTE;      ;1      ;     ;      ;
+POISON;      ;       ;     ;      ;1
+PSY;         ;       ;1    ;      ;
+ROCHE;1      ;       ;     ;      ;
+SOL;         ;1      ;     ;      ;
+SPECTRE;     ;       ;     ;1     ;
+VOL;         ;1      ;     ;1     ;
+FEE;         ;1      ;     ;      ;
