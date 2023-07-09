@@ -24,9 +24,10 @@ class Chasse
     private $pokemon;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=ChasseWorld::class, inversedBy="chasses")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_world;
+    private $chasseworld;
 
     public function getId(): ?int
     {
@@ -45,14 +46,15 @@ class Chasse
         return $this;
     }
 
-    public function getIdWorld(): ?int
+    public function getChasseWorld(): ?ChasseWorld
     {
-        return $this->id_world;
+        return $this->chasseworld;
     }
+    
 
-    public function setIdWorld(int $id_world): self
+    public function setChasseWorld(ChasseWorld $chasseworld): self
     {
-        $this->id_world = $id_world;
+        $this->chasseworld = $chasseworld;
 
         return $this;
     }

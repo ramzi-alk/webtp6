@@ -6,10 +6,12 @@
     <h1>Acheter Pokemon</h1>
 
     {% if market_type %}
-        <p>Vous êtes sur le point d'acheter le Pokémon "{{ market_type.pokemon }}" au prix de {{ market_type.salePrice }}.</p>
+        <p>Vous êtes sur le point d'acheter le Pokémon "{{ market_type.pokemon }}" au prix de {{ market_type.salePrice }} pièces.</p>
         <p>Confirmez votre achat en cliquant sur le bouton ci-dessous :</p>
-       
-        <a href="{{ path('confirm_purchase', {'id': market_type.getId()}) }}">Confirmer l'achat</a>
+        <form action="{{ path('confirm_purchase', {'id': market_type.getId()}) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('confirm_purchase') }}" />
+            <button type="submit">Confirmer l'achat</button>
+        </form>
     {% else %}
         <p>Le Pokémon que vous souhaitez acheter n'est plus disponible.</p>
     {% endif %}

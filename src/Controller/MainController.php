@@ -10,7 +10,7 @@ class MainController extends AbstractController
 {
     private $userId;
     /**
-     * @Route("/", name="homepage")
+     * @Route("/main", name="homepage")
      */
     public function index(EntityRepository $entityRepository)
     {

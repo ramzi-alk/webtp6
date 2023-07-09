@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ChasseController!{% endblock %}
+{% block title %}Bienveneue à la chasse !{% endblock %}
 
 {% block body %}
 <style>
@@ -12,7 +12,10 @@
     <h1>Bienvenue à la chasse ! ✅</h1>
 
     <p>Vous pouvez maintenant commencer à chasser !</p>
-    
-    <select> 
+   
+    {{ include('chasse/_form.html.twig', {'button_label': 'Chasser'}) }}
+
 </div>
+
+
 {% endblock %}

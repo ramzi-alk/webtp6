@@ -2,10 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-buy_pokemon:
-    path: /buy/{id}
-    controller: App\Controller\CommerceController::buyPokemon
-    methods: [GET, POST]
+# buy_pokemon:
+#     path: /buy/{id}
+#     controller: App\Controller\CommerceController::buyPokemon
+#     methods: [GET, POST]
 pokemon_type_sell:
   path: /sell/{id}
   controller: App\Controller\CommerceController::sellPokemon

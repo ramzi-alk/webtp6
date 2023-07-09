@@ -9,8 +9,11 @@ use App\Entity\Commerce;
 use App\Repository\CommerceRepository;
 use App\Entity\PokemonType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 
 class CommerceController extends AbstractController
 {
@@ -79,17 +82,22 @@ class CommerceController extends AbstractController
         ]);
     }
 
-  /**
- * @Route("/buy/{id}", name="confirm_purchase" , methods={"GET","POST"})
+/**
+ * @Route("/buy/{id}", name="confirm_purchase", methods={"GET", "POST"})
  */
-public function confirmPurchase(Request $request, Commerce $commerce)
+public function confirmPurchase(Request $request, Commerce $commerce, CsrfTokenManagerInterface $csrfTokenManager)
 {
-    $form = $this->createForm(CommerceType::class, $commerce);
+    $form = $this->createFormBuilder()
+        ->add('csrf_token', HiddenType::class, [
+            'data' => $csrfTokenManager->getToken('confirm_purchase')->getValue(),
+        ])
+        ->getForm();
+
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
         $entityManager = $this->getDoctrine()->getManager();
-
+        print_r("testSubmit");
         $user = $this->getUser();
         $salePrice = $commerce->getSalePrice();
         $newBalance = $user->getPieces() - $salePrice;
@@ -110,8 +118,8 @@ public function confirmPurchase(Request $request, Commerce $commerce)
         return $this->redirectToRoute('homepage');
     }
 
-    return $this->render('commerce/confirm_purchase.html.twig', [
-        'commerce' => $commerce,
+    return $this->render('commerce/buy.html.twig', [
+        'market_type' => $commerce,
         'form' => $form->createView(),
     ]);
 }
@@ -120,24 +128,26 @@ public function confirmPurchase(Request $request, Commerce $commerce)
 
 
 
-    /**
-     * @Route("buy/{id}", name="commerce_show", methods={"GET, POST"})
-     */
-    public function buyPokemon($id): Response
-{
-    $entityManager = $this->getDoctrine()->getManager();
 
-    // Récupérer l'objet pokemon à partir de l'ID
-    $commerceType = $entityManager->getRepository(Commerce::class)->find($id);
+//     /**
+//      * @Route("buy/{id}", name="commerce_show", methods={"GET, POST"})
+//      */
+//     public function buyPokemon($id): Response
+// {   
+//     print_r("test") ;
+//     $entityManager = $this->getDoctrine()->getManager();
 
-    $pokemonType = $commerceType->getPokemon();
+//     // Récupérer l'objet pokemon à partir de l'ID
+//     $commerceType = $entityManager->getRepository(Commerce::class)->find($id);
+
+//     $pokemonType = $commerceType->getPokemon();
 
 
-    // Autres traitements liés à l'achat du Pokémon
+//     // Autres traitements liés à l'achat du Pokémon
 
-    return $this->render('commerce/buy.html.twig', [
-        'pokemon_type' => $pokemonType,
-        'market_type' => $commerceType,
-    ]);
-}
+//     return $this->render('commerce/buy.html.twig', [
+//         'pokemon_type' => $pokemonType,
+//         'market_type' => $commerceType,
+//     ]);
+// }
 }

@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Chasse;
+use App\Entity\ChasseWorld;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Chasse>
+ * @extends ServiceEntityRepository<ChasseWorld>
  *
- * @method Chasse|null find($id, $lockMode = null, $lockVersion = null)
- * @method Chasse|null findOneBy(array $criteria, array $orderBy = null)
- * @method Chasse[]    findAll()
- * @method Chasse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ChasseWorld|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ChasseWorld|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ChasseWorld[]    findAll()
+ * @method ChasseWorld[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ChasseRepository extends ServiceEntityRepository
+class ChasseWorldRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Chasse::class);
+        parent::__construct($registry, ChasseWorld::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Chasse $entity, bool $flush = true): void
+    public function add(ChasseWorld $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class ChasseRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Chasse $entity, bool $flush = true): void
+    public function remove(ChasseWorld $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -47,15 +47,8 @@ class ChasseRepository extends ServiceEntityRepository
         }
     }
 
-    public function findChasseWorlds(){
-        $qb = $this->createQueryBuilder('c');
-        $qb->select('c.world')
-            ->distinct(true);
-        return $qb->getQuery()->getResult();
-    }
-
     // /**
-    //  * @return Chasse[] Returns an array of Chasse objects
+    //  * @return ChasseWorld[] Returns an array of ChasseWorld objects
     //  */
     /*
     public function findByExampleField($value)
@@ -72,7 +65,7 @@ class ChasseRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Chasse
+    public function findOneBySomeField($value): ?ChasseWorld
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
